@@ -22,6 +22,7 @@
 #include "wykobi_algorithm.hpp"
 #include "wykobi_matrix.hpp"
 
+#include <random>
 #include <algorithm>
 #include <vector>
 #include <iterator>
@@ -62,7 +63,9 @@ namespace wykobi
 
             std::copy(begin,end,std::back_inserter(point_list));
 
-            std::random_shuffle(point_list.begin(),point_list.end());
+			std::random_device randomDevice;
+			std::mt19937 mersenneTwisterEngine(randomDevice());
+			std::shuffle(point_list.begin(), point_list.end(), mersenneTwisterEngine);
 
             circle = make_circle(*point_list.begin(),*(point_list.begin() + 1));
 
@@ -81,7 +84,9 @@ namespace wykobi
                                              InputIterator end,
                                              const point2d<T>& q)
          {
-            std::random_shuffle(begin,end);
+			 std::random_device randomDevice;
+			 std::mt19937 mersenneTwisterEngine(randomDevice());
+			 std::shuffle(begin, end, mersenneTwisterEngine);
 
             circle<T> circle = make_circle(q,*begin);
 
@@ -102,7 +107,9 @@ namespace wykobi
                                               const point2d<T>& q1,
                                               const point2d<T>& q2)
          {
-            std::random_shuffle(begin,end);
+			 std::random_device randomDevice;
+			 std::mt19937 mersenneTwisterEngine(randomDevice());
+			 std::shuffle(begin, end, mersenneTwisterEngine);
 
             circle<T> circle = make_circle(q1,q2);
 
